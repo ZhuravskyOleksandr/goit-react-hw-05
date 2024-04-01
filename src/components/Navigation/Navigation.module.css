@@ -1,0 +1,7 @@
+.navLink:not(:last-child) {
+  margin-right: 8px;
+}
+
+.active {
+  color: rgb(223, 0, 67);
+}
