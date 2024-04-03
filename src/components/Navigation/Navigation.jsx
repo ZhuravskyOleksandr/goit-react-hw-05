@@ -10,7 +10,7 @@ export default function Navigation() {
   }
 
   return (
-    <header>
+    <header className={css.header}>
       <NavLink to="/" className={linkClasses}>
         Home
       </NavLink>

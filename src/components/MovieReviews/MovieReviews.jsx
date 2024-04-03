@@ -1,5 +1,45 @@
 import css from './MovieReviews.module.css';
+import { useParams } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { getMovieReviews } from '../../moviesAPI';
+import MovieReviewsItem from '../MovieReviewsItem/MovieReviewsItem';
+import Loader from '../../components/Loader/Loader';
+import ErrorMessage from '../../components/ErrorMessage/ErrorMessage';
 
-export default function MovieReviews() {
-  return <div>MovieReviews</div>;
+export default function MovieReviews({ loading, setLoading, error, setError }) {
+  const { movieId } = useParams();
+  const [reviews, setReviews] = useState([]);
+
+  useEffect(() => {
+    async function fetchMovieCast() {
+      try {
+        setLoading(true);
+        setError(false);
+        const reviews = await getMovieReviews(movieId);
+        setReviews(reviews);
+      } catch (error) {
+        setError(true);
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchMovieCast();
+  }, [movieId, setLoading, setError]);
+  return (
+    <>
+      <ul>
+        {reviews.length > 0 ? (
+          reviews.map(review => (
+            <li key={review.id}>
+              <MovieReviewsItem review={review} />
+            </li>
+          ))
+        ) : (
+          <p>We don&apos;t have any reviews for this movie</p>
+        )}
+      </ul>
+      {loading && <Loader />}
+      {error && <ErrorMessage />}
+    </>
+  );
 }

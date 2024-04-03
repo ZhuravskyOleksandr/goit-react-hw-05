@@ -1,0 +1,35 @@
+.detailsWrapper {
+  display: flex;
+  column-gap: 22px;
+}
+
+.backLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 0;
+  font-weight: 500;
+  text-transform: uppercase;
+  transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.backLink:hover {
+  color: #df0043;
+}
+
+.infoLink {
+  color: blue;
+  font-weight: 500;
+  transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.infoLink:hover {
+  color: #df0043;
+}
+
+.active {
+  color: #df0043;
+  transform: scale(1.1);
+  text-shadow: 2px 2px 0 #cecece, 4px 4px 0 #aaaaaa;
+  transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}

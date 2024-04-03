@@ -1,0 +1,8 @@
+.actorsList {
+  display: flex;
+  column-gap: 16px;
+}
+
+.actorsListItem {
+  flex-basis: 100px;
+}
