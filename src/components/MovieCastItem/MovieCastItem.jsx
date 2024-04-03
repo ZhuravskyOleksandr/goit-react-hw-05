@@ -1,19 +1,19 @@
 import css from './MovieCastItem.module.css';
 
-export default function MovieCastItem({ actors, idx }) {
+export default function MovieCastItem({ actor }) {
   return (
     <>
       <div>
         <img
-          src={`https://image.tmdb.org/t/p/w200${actors[idx].profile_path}`}
-          alt={actors[idx].name}
+          src={`https://image.tmdb.org/t/p/w200${actor.profile_path}`}
+          alt={actor.name}
         />
       </div>
       <div>
-        <p>{actors[idx].name}</p>
+        <p>{actor.name}</p>
         <p>
           <b>Character: </b>
-          {actors[idx].character}
+          {actor.character}
         </p>
       </div>
     </>

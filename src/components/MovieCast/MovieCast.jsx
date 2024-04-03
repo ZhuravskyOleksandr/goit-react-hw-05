@@ -18,7 +18,8 @@ export default function MovieCast() {
         setLoading(true);
         setError(false);
         const cast = await getMovieCast(movieId);
-        setActors(cast);
+        setActors(cast.slice(0, 3));
+        console.log(cast);
       } catch (error) {
         setError(true);
       } finally {
@@ -32,15 +33,11 @@ export default function MovieCast() {
     <>
       {actors.length > 0 && (
         <ul className={css.actorsList}>
-          <li className={css.actorsListItem}>
-            <MovieCastItem actors={actors} idx={0} />
-          </li>
-          <li className={css.actorsListItem}>
-            <MovieCastItem actors={actors} idx={1} />
-          </li>
-          <li className={css.actorsListItem}>
-            <MovieCastItem actors={actors} idx={2} />
-          </li>
+          {actors.map(actor => (
+            <li key={actor.id} className={css.actorsListItem}>
+              <MovieCastItem actor={actor} />
+            </li>
+          ))}
         </ul>
       )}
       {loading && <Loader />}
