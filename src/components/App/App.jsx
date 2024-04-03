@@ -1,6 +1,6 @@
 import css from './App.module.css';
 import { Routes, Route } from 'react-router-dom';
-import { lazy, Suspense, useState } from 'react';
+import { lazy, Suspense } from 'react';
 import NotFoundPage from '../../pages/NotFoundPage/NotFoundPage';
 import Navigation from '../Navigation/Navigation';
 
@@ -15,70 +15,17 @@ const MovieReviews = lazy(() =>
 );
 
 export default function App() {
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
-
   return (
     <div className={css.container}>
       <Navigation />
 
       <Suspense fallback={<b>Loading...</b>}>
         <Routes>
-          <Route
-            path="/"
-            element={
-              <HomePage
-                loading={loading}
-                setLoading={setLoading}
-                error={error}
-                setError={setError}
-              />
-            }
-          />
-          <Route
-            path="/movies"
-            element={
-              <MoviesPage
-                loading={loading}
-                setLoading={setLoading}
-                error={error}
-                setError={setError}
-              />
-            }
-          />
-          <Route
-            path="/movies/:movieId"
-            element={
-              <MovieDetailsPage
-                loading={loading}
-                setLoading={setLoading}
-                error={error}
-                setError={setError}
-              />
-            }
-          >
-            <Route
-              path="cast"
-              element={
-                <MovieCast
-                  loading={loading}
-                  setLoading={setLoading}
-                  error={error}
-                  setError={setError}
-                />
-              }
-            />
-            <Route
-              path="reviews"
-              element={
-                <MovieReviews
-                  loading={loading}
-                  setLoading={setLoading}
-                  error={error}
-                  setError={setError}
-                />
-              }
-            />
+          <Route path="/" element={<HomePage />} />
+          <Route path="/movies" element={<MoviesPage />} />
+          <Route path="/movies/:movieId" element={<MovieDetailsPage />}>
+            <Route path="cast" element={<MovieCast />} />
+            <Route path="reviews" element={<MovieReviews />} />
           </Route>
           <Route path="*" element={<NotFoundPage />} />
         </Routes>

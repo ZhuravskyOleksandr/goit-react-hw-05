@@ -5,7 +5,9 @@ import MovieList from '../../components/MovieList/MovieList';
 import Loader from '../../components/Loader/Loader';
 import ErrorMessage from '../../components/ErrorMessage/ErrorMessage';
 
-export default function HomePage({ loading, setLoading, error, setError }) {
+export default function HomePage() {
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
   const [movies, setMovies] = useState([]);
 
   useEffect(() => {

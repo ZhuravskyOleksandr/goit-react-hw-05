@@ -6,7 +6,9 @@ import MovieCastItem from '../MovieCastItem/MovieCastItem';
 import Loader from '../../components/Loader/Loader';
 import ErrorMessage from '../../components/ErrorMessage/ErrorMessage';
 
-export default function MovieCast({ loading, setLoading, error, setError }) {
+export default function MovieCast() {
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
   const { movieId } = useParams();
   const [actors, setActors] = useState([]);
 

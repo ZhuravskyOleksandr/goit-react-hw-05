@@ -6,7 +6,9 @@ import MovieReviewsItem from '../MovieReviewsItem/MovieReviewsItem';
 import Loader from '../../components/Loader/Loader';
 import ErrorMessage from '../../components/ErrorMessage/ErrorMessage';
 
-export default function MovieReviews({ loading, setLoading, error, setError }) {
+export default function MovieReviews() {
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
   const { movieId } = useParams();
   const [reviews, setReviews] = useState([]);
 

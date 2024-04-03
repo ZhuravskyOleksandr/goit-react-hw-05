@@ -7,7 +7,9 @@ import { useSearchParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { getMoviesByName } from '../../moviesAPI';
 
-export default function MoviesPage({ loading, setLoading, error, setError }) {
+export default function MoviesPage() {
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
   const [movies, setMovies] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
   const queryParam = searchParams.get('query') ?? '';

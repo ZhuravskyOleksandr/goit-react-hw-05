@@ -1,6 +1,6 @@
 import css from './MovieDetailsPage.module.css';
 import clsx from 'clsx';
-import { useEffect, useState, Suspense } from 'react';
+import { useEffect, useState, useRef, Suspense } from 'react';
 import {
   useParams,
   Link,
@@ -13,15 +13,13 @@ import Loader from '../../components/Loader/Loader';
 import ErrorMessage from '../../components/ErrorMessage/ErrorMessage';
 import { getMovieDetails } from '/src/moviesAPI.js';
 
-export default function MovieDetailsPage({
-  loading,
-  setLoading,
-  error,
-  setError,
-}) {
+export default function MovieDetailsPage() {
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
+  const [movieDetails, setMovieDetails] = useState(null);
   const { movieId } = useParams();
   const location = useLocation();
-  const [movieDetails, setMovieDetails] = useState(null);
+  const backLinkRef = useRef(location.state?.from);
 
   function linkClasses({ isActive }) {
     return clsx(css.infoLink, {
@@ -44,11 +42,11 @@ export default function MovieDetailsPage({
     }
 
     fetchMovieDetails();
-  }, [movieId, setLoading, setError]);
+  }, [movieId, setLoading, setError, location]);
 
   return (
     <>
-      <Link className={css.backLink} to={location.state?.from ?? '/'}>
+      <Link className={css.backLink} to={backLinkRef.current ?? '/'}>
         <HiArrowLeft /> Go back
       </Link>
       {movieDetails !== null && (
